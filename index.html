@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>万圣夜主题投票</title>
-<meta name="description" content="万圣夜变装派对邀请：打开卡片，投出今年的主题。">
+<title>万圣夜主题投票 · Halloween Theme Vote</title>
+<meta name="description" content="万圣夜变装派对邀请：打开卡片，投出今年的主题。 Open the card and vote for this year's Halloween costume theme.">
 <meta property="og:title" content="万圣夜邀请函 · Halloween Night">
-<meta property="og:description" content="打开卡片，投出今年的变装主题。">
+<meta property="og:description" content="打开卡片，投出今年的变装主题。Open the card and vote for our costume theme.">
 <meta property="og:image" content="posters/odyssey.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,7 +82,9 @@
   .invite .hw { font-family: var(--spooky); font-size: 46px; line-height: 1; color: var(--pumpkin); letter-spacing: .04em; text-shadow: 0 0 18px rgba(245, 132, 31, .45); }
   .invite .zh { font-family: var(--serif); font-weight: 900; font-size: 40px; line-height: 1.15; letter-spacing: .12em; }
   .invite .tagline { font-family: var(--latin); font-size: 13px; letter-spacing: .3em; color: var(--pumpkin-pale); }
-  .invite .sub { font-size: 14px; color: var(--ash); margin-top: 6px; }
+  .invite .sub { font-size: 14px; color: var(--ash); margin-top: 6px; line-height: 1.45; }
+  .invite .sub i { display: block; font-style: normal; font-size: 12px; opacity: .85; }
+  .invite .tap small { font-weight: 500; opacity: .8; }
   .invite .tap {
     margin-top: 14px; display: inline-flex; gap: 8px; align-items: center;
     background: var(--pumpkin); color: var(--ink); font-weight: 700; font-size: 14px;
@@ -98,6 +100,10 @@
   h1 em { font-style: normal; color: var(--pumpkin); }
   .lede { margin: 0; color: var(--ash); max-width: 40em; }
   .lede b { color: var(--bone); font-weight: 500; }
+  .h1-en { margin: -4px 0 0; font-family: var(--latin); font-size: clamp(15px, 2.4vw, 19px); letter-spacing: .04em; color: var(--pumpkin-pale); }
+  .en-line { display: inline-block; margin-top: 4px; font-size: 14px; }
+  .en-inline { font-weight: 400; color: var(--ash); font-size: .85em; }
+  .desc .en-line { margin-top: 2px; font-size: 13px; opacity: .85; }
   .who {
     display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
     background: rgba(28, 18, 41, .8); border: 1px solid var(--line); border-radius: 10px;
@@ -161,7 +167,7 @@
   .admin button { border: 0; background: var(--pumpkin); color: var(--ink); font-weight: 700; border-radius: 6px; padding: 8px 16px; cursor: pointer; }
   .res-row { display: grid; gap: 4px; padding-block: 8px; border-top: 1px solid var(--line); }
   .res-top { display: flex; align-items: center; gap: 10px; }
-  .res-top b { min-width: 5em; font-family: var(--serif); }
+  .res-top b { min-width: 9em; font-family: var(--serif); }
   .res-top .bar { flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
   .res-top .bar i { display: block; height: 100%; background: var(--pumpkin); }
   .res-top .n { font-family: var(--latin); color: var(--pumpkin-pale); min-width: 4.5em; text-align: right; font-variant-numeric: tabular-nums; }
@@ -184,7 +190,7 @@
 
 <!-- 第一屏：邀请卡 -->
 <section class="stage" id="stage">
-  <button class="invite" id="invite" type="button" aria-label="打开万圣夜邀请卡，开始选择主题">
+  <button class="invite" id="invite" type="button" aria-label="打开万圣夜邀请卡，开始选择主题 / Open the Halloween invitation and pick a theme">
     <svg class="scene" viewBox="0 0 380 545" aria-hidden="true">
       <defs>
         <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
@@ -246,9 +252,9 @@
     <span class="text">
       <span class="hw">Halloween</span>
       <span class="zh">万圣夜</span>
-      <span class="tagline">COSTUME PARTY</span>
-      <span class="sub">今年扮什么？由你来投</span>
-      <span class="tap">点击开启 ▸</span>
+      <span class="tagline">COSTUME PARTY · 变装派对</span>
+      <span class="sub">今年扮什么？由你来投<i>What should we dress up as? You decide.</i></span>
+      <span class="tap">点击开启 <small>Tap to open</small> ▸</span>
     </span>
   </button>
 </section>
@@ -258,10 +264,11 @@
   <header class="pick-head">
     <div class="eyebrow">Halloween · Theme Vote</div>
     <h1>选一个你最想扮的<em>主题</em></h1>
-    <p class="lede">点海报可以放大看角色。<b>每人一票，投完还能改</b>。大家的选择互相看不到，结果由发起人统一公布。</p>
+    <p class="h1-en">Pick the theme you most want to dress up as</p>
+    <p class="lede">点海报可以放大看角色。<b>每人一票，投完还能改</b>。大家的选择互相看不到，结果由发起人统一公布。<br><span class="en-line">Tap a poster to see the characters. <b>One vote each, and you can change it anytime.</b> Votes are private; the organizer will announce the result.</span></p>
     <div class="who">
-      <label for="voter-name">你的名字</label>
-      <input id="voter-name" type="text" maxlength="30" autocomplete="nickname" placeholder="例如：Toshiya / 小张">
+      <label for="voter-name">你的名字 <span class="en-inline">Your name</span></label>
+      <input id="voter-name" type="text" maxlength="30" autocomplete="nickname" placeholder="例如 e.g. Toshiya / 小张">
     </div>
     <div class="mine-banner" id="mine-banner" hidden></div>
   </header>
@@ -270,23 +277,23 @@
   <div class="status" id="status" aria-live="polite"></div>
 
   <section class="admin" id="admin" hidden>
-    <h2>发起人查看结果</h2>
+    <h2>发起人查看结果 <span class="en-inline">Organizer results</span></h2>
     <form id="admin-form">
-      <input id="admin-pass" type="password" autocomplete="current-password" placeholder="输入口令" aria-label="发起人口令">
-      <button type="submit">查看</button>
+      <input id="admin-pass" type="password" autocomplete="current-password" placeholder="输入口令 Passcode" aria-label="发起人口令 Organizer passcode">
+      <button type="submit">查看 View</button>
     </form>
     <div id="admin-out"></div>
   </section>
 
   <footer>
-    <span>剧照与海报版权归各自片方所有（环球影业、Netflix），仅用于同事间的万圣节主题投票。Stills © Universal Pictures, artwork © Netflix.</span>
-    <span><a href="#admin" id="admin-link">发起人入口</a></span>
+    <span>剧照与海报版权归各自片方所有（环球影业、Netflix、Miramax），仅用于同事间的万圣节主题投票。<br>Stills © Universal Pictures, artwork © Netflix, stills © Miramax. For a private Halloween vote only.</span>
+    <span><a href="#admin" id="admin-link">发起人入口 · Organizer</a></span>
   </footer>
 </div>
 
 <div class="lightbox" id="lightbox" hidden>
   <img id="lightbox-img" alt="">
-  <button type="button" id="lightbox-close">关闭</button>
+  <button type="button" id="lightbox-close">关闭 Close</button>
 </div>
 
 <script>
@@ -295,11 +302,14 @@ const SUPABASE_KEY = "sb_publishable_AqG84TJVMP-5NsLCwTS7CA_BYO2ocrr";
 
 const THEMES = [
   { id: "odyssey", name: "奥德赛", en: "The Odyssey", poster: "posters/odyssey.jpg",
-    desc: "诺兰 2026 年的史诗电影。英雄、神祇、海怪、求婚者，古希腊造型。" },
+    desc: "诺兰 2026 年的史诗电影。英雄、神祇、海怪、求婚者，古希腊造型。",
+    descEn: "Christopher Nolan's 2026 epic. Heroes, gods, monsters and suitors in ancient Greek style." },
   { id: "st", name: "怪奇物语", en: "Stranger Things", poster: "posters/stranger-things.jpg",
-    desc: "80 年代霍金斯小镇的孩子们、大人们，还有颠倒世界里的怪物。" },
-  { id: "football", name: "足球", en: "Football", poster: null,
-    desc: "球星、裁判、守门员，还有万圣夜限定的僵尸前锋。海报准备中。" },
+    desc: "80 年代霍金斯小镇的孩子们、大人们，还有颠倒世界里的怪物。",
+    descEn: "The kids and grown-ups of 1980s Hawkins, plus the monsters of the Upside Down." },
+  { id: "killbill", name: "杀死比尔", en: "Kill Bill", poster: "posters/kill-bill.jpg",
+    desc: "昆汀的复仇武侠片。黄色运动服、武士刀、眼罩和疯狂 88 面具。",
+    descEn: "Tarantino's revenge saga. Yellow tracksuit, katanas, eye patches and Crazy 88 masks." },
 ];
 const THEME = Object.fromEntries(THEMES.map(t => [t.id, t]));
 
@@ -359,22 +369,23 @@ function renderThemes() {
     el.className = "theme" + (state.mine === t.id ? " mine" : "");
     el.innerHTML = `
       ${t.poster
-        ? `<button class="poster" type="button" aria-label="放大查看海报"><img loading="lazy" alt=""><span class="zoom">点我放大</span></button>`
-        : `<div class="placeholder"><div><span>?</span>海报准备中</div></div>`}
+        ? `<button class="poster" type="button" aria-label="放大查看海报 / Enlarge poster"><img loading="lazy" alt=""><span class="zoom">点我放大 Tap to zoom</span></button>`
+        : `<div class="placeholder"><div><span>?</span>海报准备中<br>Poster coming soon</div></div>`}
       <div class="body">
         <div class="name"><h2></h2><span class="en"></span></div>
-        <p class="desc"></p>
+        <p class="desc"><span class="zh-line"></span><br><span class="en-line"></span></p>
         <button class="vote" type="button"></button>
       </div>`;
     el.querySelector("h2").textContent = t.name;
     el.querySelector(".en").textContent = t.en;
-    el.querySelector(".desc").textContent = t.desc;
+    el.querySelector(".desc .zh-line").textContent = t.desc;
+    el.querySelector(".desc .en-line").textContent = t.descEn;
     if (t.poster) {
       el.querySelector("img").src = t.poster;
       el.querySelector(".poster").addEventListener("click", () => openLightbox(t.poster, t.name));
     }
     const btn = el.querySelector(".vote");
-    btn.textContent = state.mine === t.id ? "✓ 我选了这个" : "选这个";
+    btn.textContent = state.mine === t.id ? "✓ 我选了这个 · My pick" : "选这个 · Pick this";
     btn.disabled = state.busy;
     btn.addEventListener("click", () => vote(t.id));
     box.append(el);
@@ -387,16 +398,16 @@ function renderBanner() {
   b.replaceChildren();
   if (state.mine && THEME[state.mine]) {
     const s = document.createElement("span");
-    s.append("你选了：");
+    s.append("你选了 You picked: ");
     const strong = document.createElement("b");
-    strong.textContent = THEME[state.mine].name;
-    s.append(strong, "（可以随时改）");
+    strong.textContent = `${THEME[state.mine].name} ${THEME[state.mine].en}`;
+    s.append(strong, "（可以随时改 · you can change it anytime）");
     b.append(s);
   }
   if (state.count != null) {
     const c = document.createElement("span");
     c.className = "count";
-    c.textContent = `已有 ${state.count} 人参与投票`;
+    c.textContent = `已有 ${state.count} 人参与投票 · ${state.count} ${state.count === 1 ? "person has" : "people have"} voted`;
     b.append(c);
   }
   b.hidden = !b.childNodes.length;
@@ -405,7 +416,7 @@ function renderBanner() {
 async function vote(themeId) {
   const name = nameInput.value.trim();
   if (!name) {
-    setStatus("先在上面填一下你的名字，再选主题。");
+    setStatus("先在上面填一下你的名字，再选主题。Please enter your name first.");
     nameInput.focus();
     return;
   }
@@ -418,11 +429,11 @@ async function vote(themeId) {
   try {
     await rpc("cast_vote", { p_voter: voterId, p_name: name, p_theme: themeId });
     store.set("hv-theme", themeId);
-    setStatus(prev ? `已改成「${THEME[themeId].name}」。` : `投票成功：「${THEME[themeId].name}」。谢谢！`);
+    setStatus(prev ? `已改成「${THEME[themeId].name}」。Changed to ${THEME[themeId].en}.` : `投票成功：「${THEME[themeId].name}」。谢谢！Voted for ${THEME[themeId].en}. Thanks!`);
     refreshCount();
   } catch (e) {
     state.mine = prev;
-    setStatus("没投成功，网络可能不稳，请再点一次。");
+    setStatus("没投成功，网络可能不稳，请再点一次。The vote didn't go through. Please try again.");
   } finally {
     state.busy = false;
     renderThemes();
@@ -438,7 +449,7 @@ nameInput.addEventListener("change", async () => {
   const name = nameInput.value.trim();
   store.set("hv-name", name);
   if (name && state.mine) {
-    try { await rpc("cast_vote", { p_voter: voterId, p_name: name, p_theme: state.mine }); setStatus("名字已更新。"); } catch {}
+    try { await rpc("cast_vote", { p_voter: voterId, p_name: name, p_theme: state.mine }); setStatus("名字已更新。Name updated."); } catch {}
   }
 });
 
@@ -449,7 +460,7 @@ $("admin-link").addEventListener("click", () => { $("admin").hidden = false; set
 $("admin-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const out = $("admin-out");
-  out.textContent = "读取中…";
+  out.textContent = "读取中… Loading…";
   try {
     const rows = await rpc("vote_results", { p_passcode: $("admin-pass").value });
     const groups = Object.fromEntries(THEMES.map(t => [t.id, []]));
@@ -458,25 +469,25 @@ $("admin-form").addEventListener("submit", async (e) => {
     const max = Math.max(1, ...Object.values(groups).map(a => a.length));
     out.replaceChildren();
     const head = document.createElement("div");
-    head.textContent = `共 ${total} 人投票`;
+    head.textContent = `共 ${total} 人投票 · ${total} votes in total`;
     out.append(head);
     for (const [id, names] of Object.entries(groups).sort((a, b) => b[1].length - a[1].length)) {
       const row = document.createElement("div");
       row.className = "res-row";
-      row.innerHTML = `<div class="res-top"><b></b><span class="bar"><i style="width:${names.length / max * 100}%"></i></span><span class="n">${names.length} 票 · ${total ? Math.round(names.length / total * 100) : 0}%</span></div><div class="res-names"></div>`;
-      row.querySelector("b").textContent = THEME[id] ? THEME[id].name : id;
+      row.innerHTML = `<div class="res-top"><b></b><span class="bar"><i style="width:${names.length / max * 100}%"></i></span><span class="n">${names.length} 票 votes · ${total ? Math.round(names.length / total * 100) : 0}%</span></div><div class="res-names"></div>`;
+      row.querySelector("b").textContent = THEME[id] ? `${THEME[id].name} ${THEME[id].en}` : id;
       row.querySelector(".res-names").textContent = names.length ? names.join("、") : "—";
       out.append(row);
     }
   } catch (err) {
-    out.textContent = /passcode/i.test(err.message) ? "口令不对。" : "读取失败，请稍后再试。";
+    out.textContent = /passcode/i.test(err.message) ? "口令不对。Wrong passcode." : "读取失败，请稍后再试。Couldn't load results, please try again.";
   }
 });
 
 // ---- 海报放大 ----
 function openLightbox(src, alt) {
   $("lightbox-img").src = src;
-  $("lightbox-img").alt = alt + " 海报";
+  $("lightbox-img").alt = alt + " 海报 poster";
   $("lightbox").hidden = false;
   $("lightbox-close").focus();
 }
