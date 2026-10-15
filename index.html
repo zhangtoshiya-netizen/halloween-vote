@@ -174,6 +174,66 @@
   @media (hover: none) { .viewer .nav { display: none; } .hint-mouse { display: none; } }
   @media (hover: hover) { .hint-touch { display: none; } }
 
+  /* ---------- 组合拍照（主页面） ---------- */
+  .groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+  .gcard {
+    display: grid; grid-template-rows: auto 1fr; text-align: left; padding: 0; cursor: pointer;
+    background: var(--ink); color: var(--bone); border: 1px solid #2c2620; border-radius: 12px; overflow: hidden;
+    transition: transform .18s, border-color .18s;
+  }
+  .gcard:hover { transform: translateY(-3px); border-color: var(--yellow); }
+  .gcard:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+  .gcard .ph { aspect-ratio: 16 / 10; overflow: hidden; background: #000; position: relative; }
+  .gcard .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gcard .ph .count { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.7); color: #fff; font-size: 12px; padding: 2px 10px; border-radius: 999px; }
+  .gcard .body { padding: 12px 14px 14px; display: grid; gap: 6px; align-content: start; }
+  .gcard h3 { margin: 0; font-family: var(--serif); font-size: 19px; color: var(--yellow); }
+  .gcard h3 small { font-family: var(--poster); font-weight: 400; color: var(--red); letter-spacing: .05em; font-size: 14px; margin-left: 6px; }
+  .who { display: flex; flex-wrap: wrap; gap: 6px; }
+  .who span { font-size: 12px; background: #2c2620; color: var(--bone); padding: 2px 9px; border-radius: 999px; }
+  .who span.me { background: var(--yellow); color: var(--black); font-weight: 700; }
+  .desc { font-size: 14px; }
+  .desc .en { display: block; font-size: 12.5px; color: #a39a8c; }
+  .tipline { font-size: 13px; color: var(--pumpkin-pale); }
+  .tipline .en { display: block; font-size: 12px; opacity: .85; }
+
+  /* ---------- 角色详情页 ---------- */
+  .detail {
+    position: fixed; inset: 0; z-index: 40; background: var(--sky); overflow-y: auto; -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  .dbar {
+    position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 10px; background: var(--yellow); color: var(--black);
+  }
+  .dbar .dtitle { font-family: var(--serif); font-weight: 900; font-size: 20px; line-height: 1.2; min-width: 0; }
+  .dbar .dtitle small { font-family: var(--poster); font-weight: 400; color: var(--red); letter-spacing: .05em; font-size: 15px; margin-left: 6px; }
+  .dbar .dbtn { border: 2px solid var(--black); background: var(--black); color: var(--yellow); border-radius: 999px; padding: 6px 14px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .dbar .dbtn:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+  .dbody { max-width: 900px; margin: 0 auto; padding: 18px 16px calc(40px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 8px; }
+  .board { padding: 0; border: 0; background: none; cursor: zoom-in; display: block; width: 100%; border-radius: 10px; overflow: hidden; position: relative; }
+  .board img { width: 100%; display: block; }
+  .board .zoom, .pose .ph .zoom { position: absolute; right: 10px; bottom: 10px; background: rgba(0,0,0,.72); color: #fff; font-size: 12px; padding: 3px 12px; border-radius: 999px; }
+  .dsec { scroll-margin-top: 72px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin: 22px 0 6px; }
+  .dsec h2 { margin: 0; font-family: var(--serif); font-size: 22px; }
+  .dsec .en { font-family: var(--poster); letter-spacing: .06em; color: var(--yellow); font-size: 17px; }
+  .dsec .note { flex-basis: 100%; color: var(--ash); font-size: 13px; }
+  .poses { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 14px; }
+  .pose { background: var(--ink); border: 1px solid #2c2620; border-radius: 12px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+  .pose .ph { padding: 0; border: 0; background: #000; cursor: zoom-in; display: block; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; position: relative; }
+  .pose .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pose .ph:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+  .pose .txt { padding: 12px 14px 14px; display: grid; gap: 6px; align-content: start; }
+  .pose h3 { margin: 0; font-family: var(--serif); font-size: 17px; color: var(--yellow); }
+  .pose h3 small { font-family: var(--poster); font-weight: 400; color: var(--red); letter-spacing: .05em; font-size: 13px; margin-left: 6px; }
+  .pose .thumbs { display: flex; gap: 6px; }
+  .pose .thumbs button { padding: 0; border: 1px solid #3a332b; background: #000; width: 64px; height: 44px; border-radius: 6px; overflow: hidden; cursor: zoom-in; }
+  .pose .thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dnav { display: flex; justify-content: space-between; gap: 10px; margin-top: 22px; }
+  .dnav button { flex: 1; border: 1px solid #3a332b; background: var(--ink); color: var(--bone); border-radius: 10px; padding: 12px; cursor: pointer; text-align: center; }
+  .dnav button:hover { border-color: var(--yellow); }
+  .dnav small { display: block; color: var(--ash); font-size: 12px; }
+
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
@@ -259,6 +319,12 @@
     <div class="cards" id="cards"></div>
 
     <div class="section-head">
+      <h2>组合拍照灵感</h2><span class="en">GROUP PHOTO IDEAS</span>
+      <span class="note">约上同伴，照着电影名场面一起拍 · Grab your crew and recreate a classic scene. 点卡片看剧照 · Tap a card to see the stills.</span>
+    </div>
+    <div class="groups" id="groups"></div>
+
+    <div class="section-head">
       <h2>准备小贴士</h2><span class="en">TIPS</span>
     </div>
     <div class="tips">
@@ -272,6 +338,15 @@
       Stills and posters © Miramax. Item photos from Wikimedia Commons (credits on each board); other items are illustrations. For a private Halloween event only.
     </footer>
   </main>
+</div>
+
+<!-- 角色详情页 -->
+<div class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="dtitle">
+  <div class="dbar">
+    <div class="dtitle" id="dtitle"></div>
+    <button class="dbtn" type="button" id="dclose">‹ 返回 Back</button>
+  </div>
+  <div class="dbody" id="dbody"></div>
 </div>
 
 <!-- 看图器 -->
@@ -297,19 +372,83 @@
 <script>
 // 难度从易到难；同难度按出场顺序
 const ROLES = [
-  { key: "02-bill",    zh: "比尔",        en: "BILL",          lv: 1, s: "黑外套 + 米色衬衫 + 竹笛", se: "Black jacket, beige shirt, flute" },
-  { key: "06-vernita", zh: "维妮塔·格林", en: "VERNITA GREEN", lv: 1, s: "黑高领 + 金耳环 + 麦片盒", se: "Black turtleneck, gold hoops, cereal box" },
-  { key: "07-budd",    zh: "巴德",        en: "BUDD",          lv: 1, s: "黑西装，或牛仔帽 + 牛仔裤", se: "Black suit, or cowboy hat and jeans" },
-  { key: "09-crazy88", zh: "疯狂 88",     en: "THE CRAZY 88",  lv: 1, s: "黑西装 + 黑眼罩面具", se: "Black suit and a black eye mask" },
-  { key: "01-bride",   zh: "新娘",        en: "THE BRIDE",     lv: 2, s: "黄色运动服 + 武士刀", se: "Yellow tracksuit and a katana" },
-  { key: "04-elle",    zh: "艾尔·德赖弗", en: "ELLE DRIVER",   lv: 2, s: "眼罩 + 金色长发", se: "Eye patch and long blonde hair" },
-  { key: "05-gogo",    zh: "贾吉·由巴利", en: "GOGO YUBARI",   lv: 2, s: "校服 + 齐刘海 + 流星锤", se: "School uniform, bangs, meteor hammer" },
-  { key: "08-hanzo",   zh: "服部半藏",    en: "HATTORI HANZO", lv: 2, s: "白衣 + 头巾 + 武士刀", se: "White robe, headband, katana" },
-  { key: "03-oren",    zh: "石井御莲",    en: "O-REN ISHII",   lv: 3, s: "白色和服 + 发簪 + 红唇", se: "White kimono, hairpins, red lips" },
+  { id: "bill",    key: "02-bill",    zh: "比尔",        en: "BILL",          lv: 1, s: "黑外套 + 米色衬衫 + 竹笛", se: "Black jacket, beige shirt, flute" },
+  { id: "vernita", key: "06-vernita", zh: "维妮塔·格林", en: "VERNITA GREEN", lv: 1, s: "黑高领 + 金耳环 + 麦片盒", se: "Black turtleneck, gold hoops, cereal box" },
+  { id: "budd",    key: "07-budd",    zh: "巴德",        en: "BUDD",          lv: 1, s: "黑西装，或牛仔帽 + 牛仔裤", se: "Black suit, or cowboy hat and jeans" },
+  { id: "crazy88", key: "09-crazy88", zh: "疯狂 88",     en: "THE CRAZY 88",  lv: 1, s: "黑西装 + 黑眼罩面具", se: "Black suit and a black eye mask" },
+  { id: "bride",   key: "01-bride",   zh: "新娘",        en: "THE BRIDE",     lv: 2, s: "黄色运动服 + 武士刀", se: "Yellow tracksuit and a katana" },
+  { id: "elle",    key: "04-elle",    zh: "艾尔·德赖弗", en: "ELLE DRIVER",   lv: 2, s: "眼罩 + 金色长发", se: "Eye patch and long blonde hair" },
+  { id: "gogo",    key: "05-gogo",    zh: "贾吉·由巴利", en: "GOGO YUBARI",   lv: 2, s: "校服 + 齐刘海 + 流星锤", se: "School uniform, bangs, meteor hammer" },
+  { id: "hanzo",   key: "08-hanzo",   zh: "服部半藏",    en: "HATTORI HANZO", lv: 2, s: "白衣 + 头巾 + 武士刀", se: "White robe, headband, katana" },
+  { id: "oren",    key: "03-oren",    zh: "石井御莲",    en: "O-REN ISHII",   lv: 3, s: "白色和服 + 发簪 + 红唇", se: "White kimono, hairpins, red lips" },
 ];
-// 看图器的顺序：总览在最前
-const GALLERY = [{ key: "00-overview", zh: "总览", en: "OVERVIEW" }, ...ROLES];
+const ROLE = Object.fromEntries(ROLES.map((r) => [r.id, r]));
+
+// 单人 Pose：剧照 + 姿势说明
+const SOLO = {
+  bride: [
+    { img: "bride-solo", zh: "双手竖握武士刀，侧身回头瞪人", en: "Hold the katana upright in both hands, turn and glare over your shoulder" },
+    { img: "bride-sword", zh: "刀横在眼前，斜眼看镜头", en: "Katana level at eye height, side-eye the camera" },
+    { img: "bride-helmet", zh: "骑士造型：戴上黄色摩托头盔", en: "Biker look: put on a yellow motorcycle helmet" },
+  ],
+  bill: [{ img: "bill-solo", zh: "一手指向镜头（拿笛子或玩具枪），表情淡定", en: "Point a flute (or toy gun) at the camera, stay perfectly calm" }],
+  oren: [
+    { img: "oren-solo", zh: "一手举刀过头，一手横握刀鞘", en: "Katana raised overhead, scabbard held level in the other hand" },
+    { img: "oren-sword", zh: "手臂伸直把刀横在身侧，冷眼看镜头", en: "Arm straight, blade held out to the side, cold stare" },
+  ],
+  elle: [
+    { img: "elle-suit", zh: "黑西装 + 眼罩，一手举着便条，挑眉", en: "Black suit and eye patch, hold up a note, raise an eyebrow" },
+    { img: "elle-whistle", zh: "护士造型：嘟嘴吹口哨，侧身走过", en: "Nurse look: pucker up and whistle as you walk past" },
+  ],
+  gogo: [{ img: "gogo-wave", zh: "一手挥手打招呼，一手拎着流星锤，歪头甜笑", en: "Wave with one hand, hold the meteor hammer chain in the other, sweet head tilt" }],
+  vernita: [{ img: "vernita-solo", zh: "居高临下看镜头，下巴微抬", en: "Look down into the camera, chin slightly raised" }],
+  budd: [{ img: "budd-solo", zh: "一脸疲惫地低头看镜头，领带松一点", en: "Look down at the camera, tired, tie a little loose" }],
+  hanzo: [{ img: "hanzo-sword", zh: "双手把武士刀横举到眼前", en: "Hold the katana level in front of your eyes with both hands" }],
+  crazy88: [{ img: "crazy88-mask", zh: "戴好眼罩面具，刀举在身前，一排站好", en: "Masks on, swords up, stand in a line" }],
+};
+
+// 组合拍照
+const GROUPS = [
+  { id: "entrance", zh: "御莲出场", en: "THE ENTRANCE", who: ["oren", "gogo", "crazy88"], imgs: ["entrance-1", "entrance-2", "oren-entourage"],
+    d: "御莲走在正中最前面，贾吉在她身后半步，疯狂 88 戴着面具跟在后面。大家抬起下巴，慢慢走向镜头，镜头放低拍。",
+    de: "O-Ren leads in the middle, Gogo half a step behind, the Crazy 88 masked at the back. Chins up, walk slowly toward a low camera.",
+    t: "拍慢动作视频效果最好；可以再加一位黑衣女助理。", te: "Slow-motion video works best. Add an assistant in black if you have one." },
+  { id: "vipers-down", zh: "毒蛇小队俯视", en: "VIPERS LOOK DOWN", who: ["elle", "vernita", "budd", "oren", "bill"], imgs: ["vipers-down", "vipers"],
+    d: "手机放在地上镜头朝上，四个人围成一圈，弯腰低头往下看。",
+    de: "Put a phone on the floor facing up. Four of you circle round, lean in and look down into it.",
+    t: "用定时拍摄或请人按快门；比尔可以站在后面加入。", te: "Use the self-timer or a friend. Bill can join from behind." },
+  { id: "vipers-back", zh: "毒蛇小队背影", en: "VIPERS FROM BEHIND", who: ["vernita", "budd", "oren", "elle"], imgs: ["vipers-back", "vipers-back2"],
+    d: "四人背对镜头站成一排，道具背在身后或垂在身侧。镜头放低从后面拍，找一面白墙或一扇门做背景。",
+    de: "Stand in a row with your backs to the camera, props behind you or at your side. Shoot low from behind, against a white wall or a doorway.",
+    t: "电影里拿的是枪，换成武士刀或空手也一样有感觉。", te: "They carry guns in the film; katanas or empty hands work just as well." },
+  { id: "standoff", zh: "雪地对峙", en: "SNOW STANDOFF", who: ["oren", "bride"], imgs: ["snow-standoff", "snow-duel"],
+    d: "两人拉开距离：御莲举刀过头，新娘压低重心持刀。拍远景，让两人都完整入镜。",
+    de: "Keep your distance: O-Ren raises her sword overhead, the Bride crouches low, blade ready. Shoot wide so both are in frame.",
+    t: "撒一把白色纸屑当雪花。", te: "Toss some white confetti for snow." },
+  { id: "crossed", zh: "双刀交锋", en: "CROSSED SWORDS", who: ["bride", "oren"], imgs: ["swords-crossed"],
+    d: "两人肩并肩站，刀在身前交叉成 X，扭头互瞪。",
+    de: "Stand shoulder to shoulder, cross your blades into an X in front of you, and glare at each other.",
+    t: "", te: "" },
+  { id: "ceiling", zh: "天花板偷袭", en: "AMBUSH FROM ABOVE", who: ["bride", "gogo"], imgs: ["ceiling"],
+    d: "新娘蹲在高处往下看，贾吉在下面拿着刀，一脸浑然不觉。",
+    de: "The Bride crouches up high looking down; Gogo stands below, blade in hand, completely unaware.",
+    t: "只站在稳固的楼梯或台阶上，不要爬家具。", te: "Use sturdy stairs or steps only. No climbing on furniture." },
+  { id: "crazy88-fight", zh: "新娘大战疯狂 88", en: "THE BRIDE VS. THE CRAZY 88", who: ["bride", "crazy88"], imgs: ["crazy88-fight"],
+    d: "新娘站在正中压低重心，疯狂 88 举刀围成半圈。人越多越好看。",
+    de: "The Bride holds the center in a low stance while the Crazy 88 close in with swords drawn. The more of you, the better.",
+    t: "", te: "" },
+  { id: "profiles", zh: "侧脸对视", en: "FACE TO FACE", who: ["bill", "bride"], imgs: ["profiles"],
+    d: "两人侧脸贴近、互相对视，照片转成黑白。",
+    de: "Stand close in profile, eyes locked, then turn the photo black and white.",
+    t: "", te: "" },
+  { id: "present", zh: "半藏献刀", en: "THE GIFT OF THE SWORD", who: ["hanzo", "bride"], imgs: ["hanzo-present", "hanzo-sword"],
+    d: "半藏双手把武士刀平举在胸前，新娘在对面准备接刀。",
+    de: "Hanzo holds the katana level at chest height in both hands; the Bride faces him, ready to receive it.",
+    t: "", te: "" },
+];
+const STILL = (k) => ({ src: `guide/stills/full/${k}.jpg`, thumb: `guide/stills/thumb/${k}.jpg` });
 const $ = (id) => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 
 // ---- 揭晓卡 → 指南 ----
 function showGuide(animate) {
@@ -320,15 +459,15 @@ function showGuide(animate) {
   } else go();
 }
 $("invite").addEventListener("click", () => showGuide(true));
-if (location.hash === "#guide") showGuide(false);
+if (location.hash === "#guide" || location.hash.startsWith("#c-")) showGuide(false);
 
 // ---- 角色卡片 ----
 ROLES.forEach((r) => {
   const b = document.createElement("button");
   b.type = "button";
   b.className = "card";
-  b.setAttribute("aria-label", `${r.zh} ${r.en}：查看装扮拆解 / view costume breakdown`);
-  b.innerHTML = `<div class="ph"><img loading="lazy" alt=""><span class="zoom">点开看大图 Tap</span></div>
+  b.setAttribute("aria-label", `${r.zh} ${r.en}：查看装扮和拍照灵感 / costume and photo ideas`);
+  b.innerHTML = `<div class="ph"><img loading="lazy" alt=""><span class="zoom">装扮 + Pose</span></div>
     <div class="body"><div class="top"><h3></h3><span class="stars"></span></div>
     <div class="en"></div><div class="short"></div><div class="short-en"></div></div>`;
   b.querySelector("img").src = `guide/thumb/${r.key}.jpg`;
@@ -337,13 +476,156 @@ ROLES.forEach((r) => {
   b.querySelector(".en").textContent = r.en;
   b.querySelector(".short").textContent = r.s;
   b.querySelector(".short-en").textContent = r.se;
-  b.addEventListener("click", () => openViewer(GALLERY.findIndex((g) => g.key === r.key)));
+  b.addEventListener("click", () => openDetail(r.id));
   $("cards").append(b);
 });
-$("open-overview").addEventListener("click", () => openViewer(0));
+$("open-overview").addEventListener("click", () => openViewer([{ src: "guide/full/00-overview.jpg", title: "总览 OVERVIEW" }], 0));
+
+function whoChips(ids, me) {
+  const w = el("div", "who");
+  ids.forEach((id) => w.append(el("span", id === me ? "me" : "", ROLE[id].zh)));
+  return w;
+}
+function descBlock(zh, en, cls = "desc") {
+  const d = el("div", cls, zh);
+  d.append(el("span", "en", en));
+  return d;
+}
+function groupItems(g) {
+  return g.imgs.map((k, i) => ({ src: STILL(k).src, title: `${g.zh} ${g.en}${g.imgs.length > 1 ? ` (${i + 1}/${g.imgs.length})` : ""}` }));
+}
+
+// ---- 主页面的组合拍照卡片 ----
+GROUPS.forEach((g) => {
+  const b = el("button", "gcard");
+  b.type = "button";
+  b.setAttribute("aria-label", `${g.zh} ${g.en}：查看剧照 / view stills`);
+  const ph = el("div", "ph");
+  const im = el("img"); im.loading = "lazy"; im.alt = ""; im.src = STILL(g.imgs[0]).thumb;
+  ph.append(im);
+  if (g.imgs.length > 1) ph.append(el("span", "count", `${g.imgs.length} 张 photos`));
+  const body = el("div", "body");
+  const h = el("h3", "", g.zh); h.append(el("small", "", g.en));
+  body.append(h, whoChips(g.who), descBlock(g.d, g.de));
+  if (g.t) body.append(descBlock("💡 " + g.t, g.te, "tipline"));
+  b.append(ph, body);
+  b.addEventListener("click", () => openViewer(groupItems(g), 0));
+  $("groups").append(b);
+});
+
+// ---- 角色详情页：装扮拆解 + 单人 Pose + 组合拍照 ----
+let detailId = null;
+function openDetail(id, push = true) {
+  const r = ROLE[id];
+  detailId = id;
+  const t = $("dtitle"); t.textContent = r.zh; t.append(el("small", "", r.en));
+  const body = $("dbody");
+  body.replaceChildren();
+  const items = [{ src: `guide/full/${r.key}.jpg`, title: `${r.zh} ${r.en} · 装扮拆解 Costume breakdown` }];
+
+  const board = el("button", "board");
+  board.type = "button";
+  board.setAttribute("aria-label", "放大查看装扮拆解 / Zoom the costume breakdown");
+  const bi = el("img"); bi.src = `guide/full/${r.key}.jpg`; bi.alt = `${r.zh} 装扮拆解 / costume breakdown`;
+  board.append(bi, el("span", "zoom", "点开放大 Tap to zoom"));
+  board.addEventListener("click", () => openViewer(items, 0));
+  body.append(board);
+
+  const sec = (zh, en, note) => {
+    const s = el("div", "dsec");
+    s.append(el("h2", "", zh), el("span", "en", en));
+    if (note) s.append(el("span", "note", note));
+    body.append(s);
+  };
+  const poseCard = (imgs, title, titleEn, extra) => {
+    const c = el("div", "pose");
+    const startIdx = items.length;
+    imgs.forEach((k, i) => items.push({ src: STILL(k).src, title: `${title} ${titleEn || ""}${imgs.length > 1 ? ` (${i + 1}/${imgs.length})` : ""}` }));
+    const ph = el("button", "ph"); ph.type = "button";
+    ph.setAttribute("aria-label", `放大查看剧照 / Zoom still: ${title}`);
+    const im = el("img"); im.loading = "lazy"; im.alt = ""; im.src = STILL(imgs[0]).thumb;
+    ph.append(im, el("span", "zoom", "点开放大 Tap"));
+    ph.addEventListener("click", () => openViewer(items, startIdx));
+    const txt = el("div", "txt");
+    const h = el("h3", "", title); if (titleEn) h.append(el("small", "", titleEn));
+    txt.append(h);
+    extra(txt);
+    if (imgs.length > 1) {
+      const th = el("div", "thumbs");
+      imgs.forEach((k, i) => {
+        const tb = el("button"); tb.type = "button";
+        tb.setAttribute("aria-label", `剧照 ${i + 1} / still ${i + 1}`);
+        const ti = el("img"); ti.loading = "lazy"; ti.alt = ""; ti.src = STILL(k).thumb;
+        tb.append(ti);
+        tb.addEventListener("click", () => openViewer(items, startIdx + i));
+        th.append(tb);
+      });
+      txt.append(th);
+    }
+    c.append(ph, txt);
+    return c;
+  };
+
+  sec("单人 Pose", "SOLO POSE", "照着剧照摆个经典动作 · Copy the pose from the film.");
+  const sp = el("div", "poses");
+  (SOLO[id] || []).forEach((p) => {
+    const c = poseCard([p.img], p.zh, "", (txt) => txt.append(descBlock(p.zh, p.en)));
+    c.querySelector("h3").remove();   // 单人卡片的说明就是标题，不重复显示
+    sp.append(c);
+  });
+  body.append(sp);
+
+  const gs = GROUPS.filter((g) => g.who.includes(id));
+  if (gs.length) {
+    sec("组合拍照", "GROUP SHOTS", "约上这些角色一起拍 · Team up with these characters.");
+    const gp = el("div", "poses");
+    gs.forEach((g) => gp.append(poseCard(g.imgs, g.zh, g.en, (txt) => {
+      txt.append(whoChips(g.who, id), descBlock(g.d, g.de));
+      if (g.t) txt.append(descBlock("💡 " + g.t, g.te, "tipline"));
+    })));
+    body.append(gp);
+  }
+
+  // 上一个 / 下一个角色
+  const i = ROLES.findIndex((x) => x.id === id);
+  const prev = ROLES[(i - 1 + ROLES.length) % ROLES.length], next = ROLES[(i + 1) % ROLES.length];
+  const nav = el("div", "dnav");
+  const nb = (r2, label) => { const b = el("button", "", `${label} ${r2.zh}`); b.type = "button"; b.append(el("small", "", r2.en)); b.addEventListener("click", () => openDetail(r2.id, false)); return b; };
+  nav.append(nb(prev, "‹"), nb(next, "›"));
+  body.append(nav);
+
+  const wasHidden = $("detail").hidden;
+  $("detail").hidden = false;
+  $("detail").scrollTop = 0;
+  document.documentElement.style.overflow = "hidden";
+  if (push && wasHidden) history.pushState({ detail: id }, "", `#c-${id}`);
+  else history.replaceState({ detail: id }, "", `#c-${id}`);
+  if (wasHidden) $("dclose").focus({ preventScroll: true });
+}
+function hideDetail() {
+  $("detail").hidden = true;
+  if ($("viewer").hidden) document.documentElement.style.overflow = "";
+  detailId = null;
+}
+$("dclose").addEventListener("click", () => {
+  if (history.state && history.state.detail) history.back();   // 和浏览器返回键 / iPhone 侧滑返回一致
+  else { hideDetail(); history.replaceState(null, "", "#guide"); }
+});
+window.addEventListener("popstate", () => {
+  if (!$("viewer").hidden) closeViewer();
+  if (!$("detail").hidden) hideDetail();
+});
+const linked = location.hash.startsWith("#c-") ? location.hash.slice(3) : null;
+if (linked && ROLE[linked]) {
+  history.replaceState(null, "", "#guide");   // 先垫一层主页，返回时回到指南
+  openDetail(linked);
+}
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && $("viewer").hidden && !$("detail").hidden) $("dclose").click();
+});
 
 // ---- 看图器：Mac（鼠标、触控板）和 iPhone（触摸）都能缩放、拖动、切换 ----
-const V = { idx: 0, s: 1, base: 1, tx: 0, ty: 0, w: 0, h: 0, pointers: new Map(), pinch: null, drag: null, lastTap: 0, lastFocus: null, wheelLock: false };
+const V = { items: [], idx: 0, s: 1, base: 1, tx: 0, ty: 0, w: 0, h: 0, pointers: new Map(), pinch: null, drag: null, lastTap: 0, lastFocus: null, wheelLock: false };
 const stageEl = $("vstage"), img = $("vimg");
 const vw = () => stageEl.clientWidth, vh = () => stageEl.clientHeight;
 const zoomed = () => V.s > V.base * 1.02;
@@ -379,9 +661,11 @@ function toggleZoom(px, py) {
 }
 
 function show(i) {
-  V.idx = (i + GALLERY.length) % GALLERY.length;
-  const g = GALLERY[V.idx];
-  $("vtitle").textContent = `${g.zh} ${g.en} · ${V.idx + 1} / ${GALLERY.length}`;
+  const n = V.items.length;
+  V.idx = (i + n) % n;
+  const g = V.items[V.idx];
+  $("vtitle").textContent = n > 1 ? `${g.title} · ${V.idx + 1} / ${n}` : g.title;
+  $("vprev").hidden = $("vnext").hidden = n < 2;
   V.w = 0;
   img.style.visibility = "hidden";
   img.onload = () => {
@@ -390,13 +674,12 @@ function show(i) {
     fitView();
     img.style.visibility = "visible";
   };
-  img.src = `guide/full/${g.key}.jpg`;
-  img.alt = `${g.zh} ${g.en} 装扮拆解 / costume breakdown`;
-  [V.idx - 1, V.idx + 1].forEach((j) => {   // 预载前后两张
-    new Image().src = `guide/full/${GALLERY[(j + GALLERY.length) % GALLERY.length].key}.jpg`;
-  });
+  img.src = g.src;
+  img.alt = g.title;
+  if (n > 1) [V.idx - 1, V.idx + 1].forEach((j) => { new Image().src = V.items[(j + n) % n].src; });   // 预载前后两张
 }
-function openViewer(i) {
+function openViewer(items, i) {
+  V.items = items;
   V.lastFocus = document.activeElement;
   $("viewer").hidden = false;
   document.documentElement.style.overflow = "hidden";
@@ -405,7 +688,7 @@ function openViewer(i) {
 }
 function closeViewer() {
   $("viewer").hidden = true;
-  document.documentElement.style.overflow = "";
+  if ($("detail").hidden) document.documentElement.style.overflow = "";
   V.pointers.clear(); V.pinch = null; V.drag = null;
   if (V.lastFocus) V.lastFocus.focus({ preventScroll: true });
 }
@@ -420,8 +703,8 @@ $("vout").addEventListener("click", () => zoomAt(vw() / 2, vh() / 2, V.s / 1.5))
 document.addEventListener("keydown", (e) => {
   if ($("viewer").hidden) return;
   if (e.key === "Escape") closeViewer();
-  else if (e.key === "ArrowLeft") show(V.idx - 1);
-  else if (e.key === "ArrowRight") show(V.idx + 1);
+  else if (e.key === "ArrowLeft" && V.items.length > 1) show(V.idx - 1);
+  else if (e.key === "ArrowRight" && V.items.length > 1) show(V.idx + 1);
   else if (e.key === "+" || e.key === "=") zoomAt(vw() / 2, vh() / 2, V.s * 1.5);
   else if (e.key === "-") zoomAt(vw() / 2, vh() / 2, V.s / 1.5);
   else return;
@@ -436,7 +719,7 @@ stageEl.addEventListener("wheel", (e) => {
     zoomAt(e.clientX - r.left, e.clientY - r.top, V.s * Math.exp(-e.deltaY * 0.01));
   } else if (zoomed()) {
     V.tx -= e.deltaX; V.ty -= e.deltaY; apply();
-  } else if (Math.abs(e.deltaX) > 30 && Math.abs(e.deltaX) > Math.abs(e.deltaY) && !V.wheelLock) {
+  } else if (V.items.length > 1 && Math.abs(e.deltaX) > 30 && Math.abs(e.deltaX) > Math.abs(e.deltaY) && !V.wheelLock) {
     show(V.idx + (e.deltaX > 0 ? 1 : -1));
     V.wheelLock = true;
     setTimeout(() => (V.wheelLock = false), 600);
@@ -487,7 +770,7 @@ function endPointer(e) {
   V.drag = null;
   if (!dr || e.type === "pointercancel") return;
   const dx = p.x - dr.x, dy = p.y - dr.y;
-  if (!zoomed() && dr.moved > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) {   // 滑动切换
+  if (!zoomed() && V.items.length > 1 && dr.moved > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) {   // 滑动切换
     show(V.idx + (dx < 0 ? 1 : -1));
     return;
   }
