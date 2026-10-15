@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kill Bill 装扮指南 · Costume Guide</title>
-<meta name="description" content="万圣夜主题揭晓：Kill Bill 杀死比尔。9 个角色的单品拆解，照着扮就对了。 The theme is Kill Bill: costume breakdowns for 9 characters.">
+<meta name="description" content="万圣夜主题揭晓：Kill Bill 杀死比尔。10 个角色的单品拆解和拍照灵感，照着扮就对了。 The theme is Kill Bill: costume breakdowns and photo ideas for 10 characters.">
 <meta property="og:title" content="主题揭晓：Kill Bill 杀死比尔 · Costume Guide">
-<meta property="og:description" content="9 个角色的装扮指南 · Costume breakdowns for 9 characters">
+<meta property="og:description" content="10 个角色的装扮指南和拍照灵感 · Costume guide and photo ideas for 10 characters">
 <meta property="og:image" content="https://zhangtoshiya-netizen.github.io/halloween-vote/og-killbill.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="1200">
@@ -177,20 +177,24 @@
   /* ---------- 组合拍照（主页面） ---------- */
   .groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
   .gcard {
-    display: grid; grid-template-rows: auto 1fr; text-align: left; padding: 0; cursor: pointer;
+    display: grid; grid-template-rows: auto 1fr;
     background: var(--ink); color: var(--bone); border: 1px solid #2c2620; border-radius: 12px; overflow: hidden;
     transition: transform .18s, border-color .18s;
   }
   .gcard:hover { transform: translateY(-3px); border-color: var(--yellow); }
-  .gcard:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
-  .gcard .ph { aspect-ratio: 16 / 10; overflow: hidden; background: #000; position: relative; }
+  .gcard .ph { aspect-ratio: 16 / 10; overflow: hidden; background: #000; position: relative; display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in; }
+  .gcard .ph:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
   .gcard .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .gcard .ph .count { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.7); color: #fff; font-size: 12px; padding: 2px 10px; border-radius: 999px; }
   .gcard .body { padding: 12px 14px 14px; display: grid; gap: 6px; align-content: start; }
   .gcard h3 { margin: 0; font-family: var(--serif); font-size: 19px; color: var(--yellow); }
   .gcard h3 small { font-family: var(--poster); font-weight: 400; color: var(--red); letter-spacing: .05em; font-size: 14px; margin-left: 6px; }
   .who { display: flex; flex-wrap: wrap; gap: 6px; }
-  .who span { font-size: 12px; background: #2c2620; color: var(--bone); padding: 2px 9px; border-radius: 999px; }
+  .who span, .who button { font: inherit; font-size: 12px; background: #2c2620; color: var(--bone); padding: 2px 9px; border-radius: 999px; border: 1px solid transparent; line-height: 1.6; }
+  .who button { cursor: pointer; }
+  .who button::after { content: " ›"; opacity: .6; }
+  .who button:hover { border-color: var(--yellow); color: var(--yellow); }
+  .who button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 1px; }
   .who span.me { background: var(--yellow); color: var(--black); font-weight: 700; }
   .desc { font-size: 14px; }
   .desc .en { display: block; font-size: 12.5px; color: #a39a8c; }
@@ -320,7 +324,7 @@
 
     <div class="section-head">
       <h2>组合拍照灵感</h2><span class="en">GROUP PHOTO IDEAS</span>
-      <span class="note">约上同伴，照着电影名场面一起拍 · Grab your crew and recreate a classic scene. 点卡片看剧照 · Tap a card to see the stills.</span>
+      <span class="note">约上同伴，照着电影名场面一起拍。点照片看剧照，点名字看那个角色的装扮 · Grab your crew and recreate a classic scene. Tap a photo for the stills, or a name to see that character.</span>
     </div>
     <div class="groups" id="groups"></div>
 
@@ -376,6 +380,7 @@ const ROLES = [
   { id: "vernita", key: "06-vernita", zh: "维妮塔·格林", en: "VERNITA GREEN", lv: 1, s: "黑高领 + 金耳环 + 麦片盒", se: "Black turtleneck, gold hoops, cereal box" },
   { id: "budd",    key: "07-budd",    zh: "巴德",        en: "BUDD",          lv: 1, s: "黑西装，或牛仔帽 + 牛仔裤", se: "Black suit, or cowboy hat and jeans" },
   { id: "crazy88", key: "09-crazy88", zh: "疯狂 88",     en: "THE CRAZY 88",  lv: 1, s: "黑西装 + 黑眼罩面具", se: "Black suit and a black eye mask" },
+  { id: "sofie",   key: "10-sofie",   zh: "索菲·法塔莱", en: "SOFIE FATALE",  lv: 1, s: "黑色立领长外套 + 盘发", se: "Long black mandarin-collar coat, hair in a bun" },
   { id: "bride",   key: "01-bride",   zh: "新娘",        en: "THE BRIDE",     lv: 2, s: "黄色运动服 + 武士刀", se: "Yellow tracksuit and a katana" },
   { id: "elle",    key: "04-elle",    zh: "艾尔·德赖弗", en: "ELLE DRIVER",   lv: 2, s: "眼罩 + 金色长发", se: "Eye patch and long blonde hair" },
   { id: "gogo",    key: "05-gogo",    zh: "贾吉·由巴利", en: "GOGO YUBARI",   lv: 2, s: "校服 + 齐刘海 + 流星锤", se: "School uniform, bangs, meteor hammer" },
@@ -405,14 +410,15 @@ const SOLO = {
   budd: [{ img: "budd-solo", zh: "一脸疲惫地低头看镜头，领带松一点", en: "Look down at the camera, tired, tie a little loose" }],
   hanzo: [{ img: "hanzo-sword", zh: "双手把武士刀横举到眼前", en: "Hold the katana level in front of your eyes with both hands" }],
   crazy88: [{ img: "crazy88-mask", zh: "戴好眼罩面具，刀举在身前，一排站好", en: "Masks on, swords up, stand in a line" }],
+  sofie: [{ img: "sofie-solo", zh: "双手自然垂下，站在御莲斜后方，表情从容、目视前方", en: "Arms relaxed, stand just behind O-Ren, calm and looking ahead" }],
 };
 
 // 组合拍照
 const GROUPS = [
-  { id: "entrance", zh: "御莲出场", en: "THE ENTRANCE", who: ["oren", "gogo", "crazy88"], imgs: ["entrance-1", "entrance-2", "oren-entourage"],
-    d: "御莲走在正中最前面，贾吉在她身后半步，疯狂 88 戴着面具跟在后面。大家抬起下巴，慢慢走向镜头，镜头放低拍。",
-    de: "O-Ren leads in the middle, Gogo half a step behind, the Crazy 88 masked at the back. Chins up, walk slowly toward a low camera.",
-    t: "拍慢动作视频效果最好；可以再加一位黑衣女助理。", te: "Slow-motion video works best. Add an assistant in black if you have one." },
+  { id: "entrance", zh: "御莲出场", en: "THE ENTRANCE", who: ["oren", "gogo", "sofie", "crazy88"], imgs: ["entrance-1", "entrance-2", "oren-entourage"],
+    d: "御莲走在正中最前面，贾吉在她左后方半步，索菲在她右后方，疯狂 88 戴着面具跟在最后。大家抬起下巴，慢慢走向镜头，镜头放低拍。",
+    de: "O-Ren leads in the middle, Gogo half a step behind on her left, Sofie on her right, the Crazy 88 masked at the back. Chins up, walk slowly toward a low camera.",
+    t: "拍慢动作视频效果最好。", te: "Slow-motion video works best." },
   { id: "vipers-down", zh: "毒蛇小队俯视", en: "VIPERS LOOK DOWN", who: ["elle", "vernita", "budd", "oren", "bill"], imgs: ["vipers-down", "vipers"],
     d: "手机放在地上镜头朝上，四个人围成一圈，弯腰低头往下看。",
     de: "Put a phone on the floor facing up. Four of you circle round, lean in and look down into it.",
@@ -483,7 +489,15 @@ $("open-overview").addEventListener("click", () => openViewer([{ src: "guide/ful
 
 function whoChips(ids, me) {
   const w = el("div", "who");
-  ids.forEach((id) => w.append(el("span", id === me ? "me" : "", ROLE[id].zh)));
+  ids.forEach((id) => {
+    if (id === me) { w.append(el("span", "me", ROLE[id].zh)); return; }
+    const b = el("button", "", ROLE[id].zh);
+    b.type = "button";
+    b.title = `查看${ROLE[id].zh}的装扮 / See ${ROLE[id].en}`;
+    b.setAttribute("aria-label", `查看${ROLE[id].zh}的装扮和拍照灵感 / See ${ROLE[id].en}`);
+    b.addEventListener("click", (e) => { e.stopPropagation(); openDetail(id); });
+    w.append(b);
+  });
   return w;
 }
 function descBlock(zh, en, cls = "desc") {
@@ -497,19 +511,19 @@ function groupItems(g) {
 
 // ---- 主页面的组合拍照卡片 ----
 GROUPS.forEach((g) => {
-  const b = el("button", "gcard");
-  b.type = "button";
-  b.setAttribute("aria-label", `${g.zh} ${g.en}：查看剧照 / view stills`);
-  const ph = el("div", "ph");
+  const b = el("div", "gcard");
+  const ph = el("button", "ph");
+  ph.type = "button";
+  ph.setAttribute("aria-label", `${g.zh} ${g.en}：查看剧照 / view stills`);
+  ph.addEventListener("click", () => openViewer(groupItems(g), 0));
   const im = el("img"); im.loading = "lazy"; im.alt = ""; im.src = STILL(g.imgs[0]).thumb;
   ph.append(im);
-  if (g.imgs.length > 1) ph.append(el("span", "count", `${g.imgs.length} 张 photos`));
+  ph.append(el("span", "count", g.imgs.length > 1 ? `${g.imgs.length} 张剧照 · Tap` : "点开放大 · Tap"));
   const body = el("div", "body");
   const h = el("h3", "", g.zh); h.append(el("small", "", g.en));
   body.append(h, whoChips(g.who), descBlock(g.d, g.de));
   if (g.t) body.append(descBlock("💡 " + g.t, g.te, "tipline"));
   b.append(ph, body);
-  b.addEventListener("click", () => openViewer(groupItems(g), 0));
   $("groups").append(b);
 });
 
@@ -577,7 +591,7 @@ function openDetail(id, push = true) {
 
   const gs = GROUPS.filter((g) => g.who.includes(id));
   if (gs.length) {
-    sec("组合拍照", "GROUP SHOTS", "约上这些角色一起拍 · Team up with these characters.");
+    sec("组合拍照", "GROUP SHOTS", "约上这些角色一起拍，点名字可以看对方的装扮 · Team up with these characters. Tap a name to see their look.");
     const gp = el("div", "poses");
     gs.forEach((g) => gp.append(poseCard(g.imgs, g.zh, g.en, (txt) => {
       txt.append(whoChips(g.who, id), descBlock(g.d, g.de));
