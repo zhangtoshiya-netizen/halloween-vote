@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="og-killbill.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Cinzel:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Creepster&family=Cinzel:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap">
 <style>
   :root {
     color-scheme: dark;
@@ -253,6 +253,13 @@
   .gear-note { font-size: 13px; color: var(--ash); margin: 4px 0 0; }
   .gear-note .en { display: block; font-size: 12px; }
   .cast-card .nm .free { display: block; font-size: 12px; color: var(--yellow); margin-top: 2px; }
+  .cast-card .nm .free:empty { display: none; }
+  .cast-card .buylink {
+    display: inline-block; margin-top: 6px; font-size: 12px; font-weight: 700; text-decoration: none;
+    color: #fff; background: var(--red); border-radius: 999px; padding: 3px 11px;
+  }
+  .cast-card .buylink:hover { filter: brightness(1.12); }
+  .cast-card .buylink:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 
   /* ---------- 角色详情页 ---------- */
   .detail {
@@ -291,13 +298,140 @@
   .dnav button:hover { border-color: var(--yellow); }
   .dnav small { display: block; color: var(--ash); font-size: 12px; }
 
+  /* ---------- 第一屏：万圣节邀请卡 ---------- */
+  .intro-card { box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(245,132,31,.5), 0 0 60px rgba(245,132,31,.15); }
+  .intro-card .frame { border-color: rgba(245,132,31,.45); }
+  .intro-card .hw { font-family: "Creepster", var(--poster); font-size: 46px; line-height: 1; color: #f5841f; letter-spacing: .04em; text-shadow: 0 0 18px rgba(245,132,31,.45); }
+  .intro-card .zh { font-size: 40px; letter-spacing: .12em; }
+  .invite .tap.orange { background: #f5841f; color: #2b1302; animation-name: pulse-o; }
+  @keyframes pulse-o { 0%, 100% { box-shadow: 0 0 0 0 rgba(245,132,31,.55); } 50% { box-shadow: 0 0 0 10px rgba(245,132,31,0); } }
+
+  /* ---------- 第二屏：主题投票回顾 ---------- */
+  .recap {
+    min-height: 100svh; margin-inline: -16px; padding: 40px 16px 48px;
+    background:
+      radial-gradient(circle at 82% 8%, rgba(246,231,193,.14) 0, transparent 22%),
+      radial-gradient(ellipse at 50% 120%, rgba(245,132,31,.16) 0, transparent 55%);
+  }
+  .recap-in { max-width: 1080px; margin: 0 auto; display: grid; gap: 10px; }
+  .eyebrow-r { font-family: var(--latin); letter-spacing: .26em; font-size: 12px; font-weight: 700; color: #f5841f; }
+  .recap-title { margin: 0; font-family: var(--serif); font-weight: 900; font-size: clamp(30px, 6vw, 52px); }
+  .recap-sub { margin: 0; color: var(--ash); max-width: 42em; }
+  .recap-sub span { display: block; font-size: 14px; }
+  .posters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; align-items: start; }
+  @media (max-width: 760px) { .posters { grid-template-columns: 1fr; } }
+  .pcard { position: relative; background: var(--sky-2); border: 1px solid #3b2a4a; border-radius: 14px; overflow: hidden; display: grid; }
+  .pcard .pimg { display: block; width: 100%; padding: 0; border: 0; background: #000; cursor: zoom-in; aspect-ratio: 2 / 3; overflow: hidden; }
+  .pcard .pimg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pcard .pimg:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+  .pcard .pbody { padding: 14px 16px 16px; display: grid; gap: 6px; }
+  .pcard h2 { margin: 0; font-family: var(--serif); font-size: 22px; }
+  .pcard h2 small { font-family: var(--latin); font-size: 12px; letter-spacing: .14em; color: var(--ash); margin-left: 8px; font-weight: 700; }
+  .pcard .state { font-size: 13px; color: var(--ash); }
+  .pcard.lost { opacity: .55; filter: grayscale(.6); transition: opacity .2s, filter .2s; }
+  .pcard.lost:hover, .pcard.lost:focus-within { opacity: .85; filter: none; }
+  .pcard.win { border: 2px solid var(--yellow); box-shadow: 0 0 0 4px rgba(245,197,0,.18), 0 0 50px rgba(245,197,0,.25); transform: translateY(-8px); }
+  @media (max-width: 760px) { .pcard.win { order: -1; transform: none; } }
+  .pcard.win h2 { color: var(--yellow); }
+  .crown {
+    position: absolute; top: 12px; left: 12px; z-index: 1; background: var(--yellow); color: #0e0c0a;
+    font-weight: 800; font-size: 14px; padding: 4px 12px; border-radius: 999px; box-shadow: 0 4px 14px rgba(0,0,0,.4);
+  }
+  .enter {
+    justify-self: start; margin-top: 4px; border: 0; cursor: pointer; font: inherit; font-weight: 800; font-size: 15px;
+    background: var(--yellow); color: #0e0c0a; border-radius: 999px; padding: 10px 20px;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  .enter small { font-weight: 500; opacity: .75; }
+  .enter:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .backlink {
+    justify-self: start; display: inline-flex; gap: 6px; align-items: center; font: inherit; font-size: 13px; font-weight: 700;
+    color: var(--black); background: transparent; border: 2px solid var(--black); border-radius: 999px; padding: 4px 12px; cursor: pointer;
+  }
+  .backlink:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
 
-<!-- 第一屏：主题揭晓卡 -->
-<section class="stage" id="stage">
+<!-- 第一屏：万圣节邀请卡 -->
+<section class="stage" id="intro">
+  <button class="invite intro-card" id="intro-card" type="button" aria-label="打开万圣夜邀请卡 / Open the Halloween invitation">
+    <svg class="scene" viewBox="0 0 380 545" aria-hidden="true">
+      <defs>
+        <radialGradient id="moonGlowIntro" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#f6e7c1" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#f6e7c1" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g fill="#f6e7c1" opacity=".7">
+        <circle cx="44" cy="70" r="1.4"/><circle cx="96" cy="40" r="1"/><circle cx="160" cy="92" r="1.2"/>
+        <circle cx="318" cy="210" r="1.1"/><circle cx="60" cy="180" r="1"/><circle cx="214" cy="48" r="1.3"/>
+        <circle cx="300" cy="300" r=".9"/><circle cx="34" cy="262" r="1.2"/>
+      </g>
+      <circle cx="252" cy="128" r="96" fill="url(#moonGlowIntro)"/>
+      <circle cx="252" cy="128" r="58" fill="#f6e7c1"/>
+      <circle cx="232" cy="112" r="9" fill="#e7d3a3"/><circle cx="270" cy="146" r="6" fill="#e7d3a3"/><circle cx="262" cy="104" r="4" fill="#e7d3a3"/>
+      <g fill="#110b1a">
+        <path d="M206 122 q8 -10 16 -2 q4 -8 8 0 q4 -8 8 0 q8 -8 16 2 q-10 -2 -14 6 q-4 -4 -10 -4 q-6 0 -10 4 q-4 -8 -14 -6z"/>
+        <path transform="translate(70 40) scale(.7)" d="M206 122 q8 -10 16 -2 q4 -8 8 0 q4 -8 8 0 q8 -8 16 2 q-10 -2 -14 6 q-4 -4 -10 -4 q-6 0 -10 4 q-4 -8 -14 -6z"/>
+      </g>
+      <path transform="translate(-110 20) scale(.55)" d="M206 122 q8 -10 16 -2 q4 -8 8 0 q4 -8 8 0 q8 -8 16 2 q-10 -2 -14 6 q-4 -4 -10 -4 q-6 0 -10 4 q-4 -8 -14 -6z" fill="#2a1638" stroke="#f5841f" stroke-width="1.2"/>
+      <g stroke="#a597ae" stroke-width="1" fill="none" opacity=".55">
+        <path d="M12 12 L120 12 M12 12 L12 120 M12 12 L104 64 M12 12 L64 104 M12 12 L118 38 M12 12 L38 118"/>
+        <path d="M40 12 Q36 22 37 28 Q30 30 22 34 Q20 40 12 40"/>
+        <path d="M70 12 Q62 30 64 40 Q50 46 46 52 Q40 62 30 64 Q22 68 12 70"/>
+        <path d="M100 12 Q90 34 92 52 Q72 62 68 70 Q60 86 46 90 Q30 96 12 100"/>
+      </g>
+      <line x1="64" y1="104" x2="64" y2="150" stroke="#a597ae" stroke-width="1" opacity=".6"/>
+      <g fill="#110b1a" stroke="#a597ae" stroke-width="1">
+        <circle cx="64" cy="156" r="6"/><circle cx="64" cy="147" r="3.5"/>
+        <path d="M58 152 l-7 -5 M58 156 l-8 0 M58 160 l-7 5 M70 152 l7 -5 M70 156 l8 0 M70 160 l7 5" fill="none"/>
+      </g>
+      <path d="M0 330 Q60 296 120 318 T240 306 T380 316 V545 H0Z" fill="#160e22"/>
+      <g fill="#0c0812">
+        <path d="M30 330 L33 252 L41 252 L40 330Z"/>
+        <path d="M33 278 L18 258 L21 256 L35 272Z M38 268 L54 248 L57 251 L40 276Z"/>
+      </g>
+      <g transform="translate(322 468) scale(.62)">
+        <ellipse cx="0" cy="30" rx="44" ry="32" fill="#f5841f"/>
+        <ellipse cx="-20" cy="30" rx="22" ry="30" fill="#e2701a"/>
+        <ellipse cx="20" cy="30" rx="22" ry="30" fill="#e2701a"/>
+        <ellipse cx="0" cy="30" rx="16" ry="32" fill="#f5841f"/>
+        <path d="M-4 -2 q2 -10 10 -12 l2 4 q-6 2 -6 10z" fill="#4a7a2a"/>
+        <path d="M-24 20 l10 -8 l6 10z M24 20 l-10 -8 l-6 10z" fill="#2b1302"/>
+        <path d="M-26 38 q26 22 52 0 l-6 2 l-4 6 l-6 -5 l-6 6 l-6 -6 l-6 6 l-6 -6 l-4 3z" fill="#2b1302"/>
+      </g>
+      <g transform="translate(58 488) scale(.42)">
+        <ellipse cx="0" cy="30" rx="44" ry="32" fill="#f5841f"/>
+        <ellipse cx="0" cy="30" rx="16" ry="32" fill="#e2701a"/>
+        <path d="M-4 -2 q2 -10 10 -12 l2 4 q-6 2 -6 10z" fill="#4a7a2a"/>
+      </g>
+    </svg>
+    <span class="frame" aria-hidden="true"></span>
+    <span class="text">
+      <span class="hw">Halloween</span>
+      <span class="zh">万圣夜</span>
+      <span class="reveal">COSTUME PARTY · 变装派对</span>
+      <span class="sub">今年扮什么？大家投票的结果出来了<i>What are we dressing up as? The votes are in.</i></span>
+      <span class="tap orange">点击开启 <small>Tap to open</small> ▸</span>
+    </span>
+  </button>
+</section>
+
+<!-- 第二屏：主题投票回顾 -->
+<section class="recap" id="recap" hidden>
+  <div class="recap-in">
+    <div class="eyebrow-r">HALLOWEEN · THEME VOTE · 主题投票</div>
+    <h1 class="recap-title">今年的主题是……</h1>
+    <p class="recap-sub">投票已结束，感谢大家参与！点海报可以放大看，点胜出的主题进入装扮指南。<span>Voting is closed, thanks everyone! Tap a poster to enlarge it, or tap the winner to open the costume guide.</span></p>
+    <div class="posters" id="posters"></div>
+  </div>
+</section>
+
+<!-- 第三屏：主题揭晓卡 -->
+<section class="stage" id="stage" hidden>
   <button class="invite" id="invite" type="button" aria-label="打开万圣夜主题揭晓卡，查看装扮指南 / Open the theme reveal and costume guide">
     <svg class="scene" viewBox="0 0 380 545" aria-hidden="true">
       <defs>
@@ -357,6 +491,7 @@
 <div id="guide" hidden>
   <header class="hero">
     <div class="hero-in">
+      <button class="backlink" type="button" id="to-recap">‹ 回到主题投票 · Theme vote</button>
       <div class="eyebrow">HALLOWEEN · COSTUME GUIDE · 装扮指南</div>
       <h1>KILL <span>BILL</span></h1>
       <div class="zh-title">杀死比尔</div>
@@ -381,6 +516,12 @@
       <span class="note">下面这些由活动统一准备，<b>不用自己买</b>，当天现场领取。链接只是给大家看款式 · These are provided on the day, no need to buy them. Links are just to show the style.</span>
     </div>
     <div class="shop-grid" id="shared-props"></div>
+
+    <div class="section-head">
+      <h2>自己买 · 参考链接</h2><span class="en">BUY YOUR OWN</span>
+      <span class="note">这些要自己买，下面是找好的淘宝参考款，点按钮直接打开 · Pick these up yourself. Tap a button to open the Taobao listing.</span>
+    </div>
+    <div class="shop-grid" id="own-props"></div>
 
     <div class="section-head">
       <h2>选一个角色</h2><span class="en">PICK A CHARACTER</span>
@@ -547,7 +688,13 @@
       nm.innerHTML = `<b></b><small></small><span class="need"></span><span class="need en"></span><span class="free"></span><span class="cnt"></span>`;
       const free = sharedFor(r.id);
       if (free.length) nm.querySelector(".free").textContent = "✓ 活动提供：" + free.map((p) => p.zh.replace(/（.*）/, "")).join("、");
-      if (SHOP[r.id]) nm.querySelector(".free").textContent += (free.length ? " · " : "") + "🛒 有购买链接";
+      // 有个人购买链接的角色，直接在卡片上放按钮
+      (SHOP[r.id] || []).forEach((p) => {
+        const a = document.createElement("a");
+        a.className = "buylink"; a.href = p.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+        a.textContent = `🛒 ${p.zh} · 去淘宝`;
+        nm.append(a);
+      });
       nm.querySelector("b").textContent = r.zh;
       nm.querySelector("small").textContent = r.en;
       nm.querySelectorAll(".need")[0].textContent = "要准备：" + r.s;
@@ -699,16 +846,69 @@ const STILL = (k) => ({ src: `guide/stills/full/${k}.jpg`, thumb: `guide/stills/
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 
-// ---- 揭晓卡 → 指南 ----
-function showGuide(animate) {
-  const go = () => { $("stage").hidden = true; $("guide").hidden = false; window.scrollTo(0, 0); };
-  if (animate && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    $("invite").classList.add("opening");
-    setTimeout(go, 650);
-  } else go();
+// ---- 页面流程：邀请卡 → 主题投票回顾 → Kill Bill 揭晓卡 → 装扮指南 ----
+const SCREENS = ["intro", "recap", "stage", "guide"];
+const calm = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+function showScreen(name, hash) {
+  SCREENS.forEach((s) => { $(s).hidden = s !== name; });
+  document.querySelectorAll(".invite.opening").forEach((c) => c.classList.remove("opening"));
+  window.scrollTo(0, 0);
+  if (hash !== undefined) { try { history.replaceState(null, "", hash || location.pathname + location.search); } catch {} }
 }
+function openCard(card, next, hash) {
+  if (calm()) return showScreen(next, hash);
+  card.classList.add("opening");
+  setTimeout(() => showScreen(next, hash), 650);
+}
+function showGuide(animate) {
+  if (animate) openCard($("invite"), "guide", "#guide");
+  else showScreen("guide");
+}
+$("intro-card").addEventListener("click", () => openCard($("intro-card"), "recap", "#vote"));
 $("invite").addEventListener("click", () => showGuide(true));
-if (location.hash === "#guide" || location.hash.startsWith("#c-")) showGuide(false);
+$("to-recap").addEventListener("click", () => showScreen("recap", "#vote"));
+
+// 三个候选主题：Kill Bill 胜出
+const VOTED = [
+  { id: "odyssey", zh: "奥德赛", en: "The Odyssey", poster: "posters/odyssey.jpg" },
+  { id: "killbill", zh: "杀死比尔", en: "Kill Bill", poster: "posters/kill-bill.jpg", win: true },
+  { id: "st", zh: "怪奇物语", en: "Stranger Things", poster: "posters/stranger-things.jpg" },
+];
+VOTED.forEach((t) => {
+  const c = document.createElement("article");
+  c.className = "pcard " + (t.win ? "win" : "lost");
+  if (t.win) { const cr = document.createElement("span"); cr.className = "crown"; cr.textContent = "🏆 胜出 WINNER"; c.append(cr); }
+  const pb = document.createElement("button");
+  pb.type = "button"; pb.className = "pimg";
+  pb.setAttribute("aria-label", `放大查看${t.zh}海报 / Enlarge the ${t.en} poster`);
+  const im = document.createElement("img"); im.src = t.poster; im.alt = ""; im.loading = "lazy";
+  pb.append(im);
+  pb.addEventListener("click", () => openViewer([{ src: t.poster, title: `${t.zh} ${t.en}` }], 0));
+  const body = document.createElement("div"); body.className = "pbody";
+  const h = document.createElement("h2"); h.textContent = t.zh;
+  const sm = document.createElement("small"); sm.textContent = t.en.toUpperCase(); h.append(sm);
+  body.append(h);
+  if (t.win) {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "enter";
+    b.innerHTML = "进入 Kill Bill <small>Enter</small> ▸";
+    b.addEventListener("click", () => showScreen("stage", "#reveal"));
+    body.append(b);
+  } else {
+    const s = document.createElement("span"); s.className = "state"; s.textContent = "候选主题 · 投票已结束 · Runner-up";
+    body.append(s);
+  }
+  c.append(pb, body);
+  $("posters").append(c);
+});
+
+// 直达链接：#guide / #c-角色 → 指南；#vote → 投票回顾；#reveal → 揭晓卡；其他从邀请卡开始
+(() => {
+  const h = location.hash;
+  if (h === "#guide" || h.startsWith("#c-")) showScreen("guide");
+  else if (h === "#vote") showScreen("recap");
+  else if (h === "#reveal") showScreen("stage");
+})();
 
 // ---- 角色卡片 ----
 ROLES.forEach((r) => {
@@ -729,6 +929,13 @@ ROLES.forEach((r) => {
   $("cards").append(b);
 });
 SHARED.forEach((p) => $("shared-props").append(shopCard(p, "shared-list")));
+Object.entries(SHOP).forEach(([role, items]) => items.forEach((p) => {
+  const c = shopCard(p, "buy");
+  const w = document.createElement("span"); w.className = "who-for";
+  w.textContent = `角色：${ROLE[role].zh} · ${ROLE[role].en}`;
+  c.insertBefore(w, c.querySelector(".badge"));
+  $("own-props").append(c);
+}));
 $("open-overview").addEventListener("click", () => openViewer([{ src: "guide/full/00-overview.jpg", title: "总览 OVERVIEW" }], 0));
 
 function whoChips(ids, me) {
