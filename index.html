@@ -231,6 +231,29 @@
   .cast-status { font-size: 13px; color: var(--pumpkin-pale); min-height: 1.4em; margin: -6px 0 8px; }
   .signup { background: var(--ink); border: 1px solid #2c2620; border-radius: 12px; padding: 12px; display: grid; gap: 10px; }
 
+  /* ---------- 道具与购买链接 ---------- */
+  .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 12px; }
+  .shop {
+    display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: center;
+    background: var(--ink); border: 1px solid #2c2620; border-radius: 12px; padding: 12px 14px;
+  }
+  .shop .ico { grid-row: span 3; font-size: 26px; width: 44px; height: 44px; display: grid; place-items: center; background: #2c2620; border-radius: 10px; }
+  .shop b { font-size: 15px; color: var(--yellow); }
+  .shop .en { font-size: 12px; color: #a39a8c; }
+  .shop .who-for { font-size: 12px; color: var(--ash); }
+  .shop .badge { justify-self: start; font-size: 12px; font-weight: 700; color: var(--black); background: var(--yellow); border-radius: 999px; padding: 1px 9px; }
+  .shop .badge.buy { background: var(--red); color: #fff; }
+  .shop a.go {
+    grid-column: 1 / -1; justify-self: start; margin-top: 6px; font-size: 13px; font-weight: 700; text-decoration: none;
+    color: var(--yellow); border: 1px solid var(--yellow); border-radius: 999px; padding: 4px 14px;
+  }
+  .shop a.go:hover { background: var(--yellow); color: var(--black); }
+  .shop a.go:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+  .shop .note2 { grid-column: 1 / -1; font-size: 12px; color: var(--pumpkin-pale); }
+  .gear-note { font-size: 13px; color: var(--ash); margin: 4px 0 0; }
+  .gear-note .en { display: block; font-size: 12px; }
+  .cast-card .nm .free { display: block; font-size: 12px; color: var(--yellow); margin-top: 2px; }
+
   /* ---------- 角色详情页 ---------- */
   .detail {
     position: fixed; inset: 0; z-index: 40; background: var(--sky); overflow-y: auto; -webkit-overflow-scrolling: touch;
@@ -352,6 +375,12 @@
     </div>
     <div class="cast-status" id="cast-status" aria-live="polite"></div>
     <div class="cast" id="cast-grid"></div>
+
+    <div class="section-head" id="props">
+      <h2>公用道具</h2><span class="en">SHARED PROPS</span>
+      <span class="note">下面这些由活动统一准备，<b>不用自己买</b>，当天现场领取。链接只是给大家看款式 · These are provided on the day, no need to buy them. Links are just to show the style.</span>
+    </div>
+    <div class="shop-grid" id="shared-props"></div>
 
     <div class="section-head">
       <h2>选一个角色</h2><span class="en">PICK A CHARACTER</span>
@@ -515,7 +544,10 @@
       face.addEventListener("click", () => openDetail(r.id));
       const nm = document.createElement("div");
       nm.className = "nm";
-      nm.innerHTML = `<b></b><small></small><span class="need"></span><span class="need en"></span><span class="cnt"></span>`;
+      nm.innerHTML = `<b></b><small></small><span class="need"></span><span class="need en"></span><span class="free"></span><span class="cnt"></span>`;
+      const free = sharedFor(r.id);
+      if (free.length) nm.querySelector(".free").textContent = "✓ 活动提供：" + free.map((p) => p.zh.replace(/（.*）/, "")).join("、");
+      if (SHOP[r.id]) nm.querySelector(".free").textContent += (free.length ? " · " : "") + "🛒 有购买链接";
       nm.querySelector("b").textContent = r.zh;
       nm.querySelector("small").textContent = r.en;
       nm.querySelectorAll(".need")[0].textContent = "要准备：" + r.s;
@@ -557,6 +589,49 @@ const ROLES = [
 ];
 const ROLE = Object.fromEntries(ROLES.map((r) => [r.id, r]));
 
+// 公用道具：活动统一准备，当天领取
+const SHARED = [
+  { id: "katana", ico: "🗡️", zh: "武士刀（竹木，带刀鞘）", en: "Katana (bamboo, with scabbard)",
+    roles: ["bride", "oren", "hanzo", "crazy88", "gogo", "bill"], url: "https://e.tb.cn/h.jdIS93JCAutpEKa?tk=g9FBTvQzViu" },
+  { id: "gun", ico: "🔫", zh: "道具枪", en: "Prop gun",
+    roles: ["bill", "budd"], url: "https://e.tb.cn/h.jX68H4KsBxTq4Iw?tk=lLyYTv9L32Q", extra: "也用于「毒蛇小队背影」合照 · Also for the Vipers group shot" },
+  { id: "mask", ico: "🎭", zh: "黑色眼罩面具（佐罗款）", en: "Black domino mask",
+    roles: ["crazy88"], url: "https://e.tb.cn/h.jds43NiFEuj0eA7?tk=kwzvTv9x1cM" },
+  { id: "nurse", ico: "🩹", zh: "病号眼罩（护士造型）", en: "Nurse eye patch",
+    roles: ["elle"], url: "https://e.tb.cn/h.jX6mYrVB9YmEQ40?tk=N6RITv9HhLM" },
+];
+// 自己买的参考链接
+const SHOP = {
+  bride: [{ ico: "👟", zh: "黄色运动服 + 鞋子（套装）", en: "Yellow tracksuit + shoes (set)", url: "https://e.tb.cn/h.jXTLCPsqsDK0jgO?tk=3N2TTvQumJ0",
+    note: "武士刀由活动提供，下单时可以选不带刀的规格 · The katana is provided, so you can pick the option without it." }],
+  gogo: [{ ico: "🎒", zh: "制服 + 假发（套装）", en: "School uniform + wig (set)", url: "https://e.tb.cn/h.jdIj8h1AdlWVkue?tk=zZYaTv9b5oK",
+    note: "刀由活动提供，下单时可以不选刀 · The blade is provided, no need to add it." }],
+};
+const sharedFor = (role) => SHARED.filter((p) => p.roles.includes(role));
+
+function shopCard(p, kind) {
+  const c = document.createElement("div");
+  c.className = "shop";
+  const ico = document.createElement("span"); ico.className = "ico"; ico.textContent = p.ico; ico.setAttribute("aria-hidden", "true");
+  const b = document.createElement("b"); b.textContent = p.zh;
+  const en = document.createElement("span"); en.className = "en"; en.textContent = p.en;
+  const badge = document.createElement("span");
+  badge.className = "badge" + (kind === "buy" ? " buy" : "");
+  badge.textContent = kind === "buy" ? "自己买 · Buy your own" : "活动提供 ✓ · Provided";
+  c.append(ico, b, en, badge);
+  if (kind === "shared-list") {
+    const w = document.createElement("span"); w.className = "who-for";
+    w.textContent = "用到的角色：" + p.roles.map((r) => ROLE[r].zh).join("、");
+    c.insertBefore(w, badge);
+  }
+  if (p.note || p.extra) { const n = document.createElement("span"); n.className = "note2"; n.textContent = p.note || p.extra; c.append(n); }
+  const a = document.createElement("a");
+  a.className = "go"; a.href = p.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+  a.textContent = kind === "buy" ? "🛒 去淘宝购买 · Shop on Taobao" : "看款式 · See the style";
+  c.append(a);
+  return c;
+}
+
 // 单人 Pose：剧照 + 姿势说明
 const SOLO = {
   bride: [
@@ -594,7 +669,7 @@ const GROUPS = [
   { id: "vipers-back", zh: "毒蛇小队背影", en: "VIPERS FROM BEHIND", who: ["vernita", "budd", "oren", "elle"], imgs: ["vipers-back", "vipers-back2"],
     d: "四人背对镜头站成一排，道具背在身后或垂在身侧。镜头放低从后面拍，找一面白墙或一扇门做背景。",
     de: "Stand in a row with your backs to the camera, props behind you or at your side. Shoot low from behind, against a white wall or a doorway.",
-    t: "电影里拿的是枪，换成武士刀或空手也一样有感觉。", te: "They carry guns in the film; katanas or empty hands work just as well." },
+    t: "电影里拿的是枪：道具枪由活动提供，当天领取。", te: "They carry guns in the film; prop guns are provided on the day." },
   { id: "standoff", zh: "雪地对峙", en: "SNOW STANDOFF", who: ["oren", "bride"], imgs: ["snow-standoff", "snow-duel"],
     d: "两人拉开距离：御莲举刀过头，新娘压低重心持刀。拍远景，让两人都完整入镜。",
     de: "Keep your distance: O-Ren raises her sword overhead, the Bride crouches low, blade ready. Shoot wide so both are in frame.",
@@ -653,6 +728,7 @@ ROLES.forEach((r) => {
   b.addEventListener("click", () => openDetail(r.id));
   $("cards").append(b);
 });
+SHARED.forEach((p) => $("shared-props").append(shopCard(p, "shared-list")));
 $("open-overview").addEventListener("click", () => openViewer([{ src: "guide/full/00-overview.jpg", title: "总览 OVERVIEW" }], 0));
 
 function whoChips(ids, me) {
@@ -747,6 +823,16 @@ function openDetail(id, push = true) {
     c.append(ph, txt);
     return c;
   };
+
+  // 道具和购买：活动提供的 + 自己买的参考链接
+  sec("道具和购买", "GEAR & SHOPPING", "");
+  const gear = el("div", "shop-grid");
+  sharedFor(id).forEach((p) => gear.append(shopCard(p, "shared")));
+  (SHOP[id] || []).forEach((p) => gear.append(shopCard(p, "buy")));
+  if (gear.children.length) body.append(gear);
+  const gn = el("p", "gear-note", (SHOP[id] ? "其他服装和配件" : "服装和配件") + "请自行准备，参考上面的装扮拆解图。");
+  gn.append(el("span", "en", "Please sort out the rest of your outfit yourself, using the breakdown above."));
+  body.append(gn);
 
   if (window.signupBlock) {
     sec("谁在扮", "WHO'S PLAYING", "报名的人会显示在这里，方便找搭档 · Everyone playing this character shows up here.");
