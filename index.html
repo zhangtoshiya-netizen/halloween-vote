@@ -774,7 +774,7 @@ function shopCard(p, kind) {
     }
     const im = document.createElement("img");
     im.alt = p.zh; im.loading = "lazy";
-    const exts = ["jpg", "png", "webp", "jpeg", "JPG", "PNG"];
+    const exts = ["JPG", "jpg", "png", "jpeg", "webp", "PNG"];
     let k = 0;
     im.onerror = () => { k += 1; if (k < exts.length) im.src = `shop/${p.img}.${exts[k]}`; else pic.remove(); };
     im.onload = () => c.classList.add("has-pic");
